@@ -1,0 +1,23 @@
+{
+  "name": "renderer",
+  "version": "1.0.0",
+  "description": "gRPC service that renders webpage HTML using Chromeless",
+  "author": "Philip I. Thomas <philip@moonlightwork.com>",
+  "private": false,
+  "dependencies": {
+    "google-protobuf": "^3.3.0"
+  },
+  "devDependencies": {
+    "ts-protoc-gen": "^0.3.2",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-friendly-formatter": "^2.0.7",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-html": "^2.0.0",
+    "eslint-plugin-import": "^2.2.0"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  }
+}

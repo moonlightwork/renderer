@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package renderer;
+
+import "google/protobuf/empty.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option go_package = "renderer";
+
+message Request {
+  string url = 1 [(gogoproto.customname) = "URL"];
+}
+
+message Response {
+    int32 status_code = 1;
+    string body = 2;
+    // We use renderer just for generating HTML - if want headers returned, a PR is welcome!
+}
+
+service RendererService {
+  rpc CheckHealth (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+  rpc Render(Request) returns (Response) {}
+}
+
