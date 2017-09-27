@@ -2,23 +2,23 @@ syntax = "proto3";
 
 package renderer;
 
-import "google/protobuf/empty.proto";
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-
 option go_package = "renderer";
 
 message Request {
-  string url = 1 [(gogoproto.customname) = "URL"];
+  string url = 1;
 }
 
 message Response {
-    int32 status_code = 1;
-    string body = 2;
-    // We use renderer just for generating HTML - if want headers returned, a PR is welcome!
+    // We use renderer just for generating HTML - 
+    // if you want headers or other info returned, a PR is welcome!
+    string html = 1;
 }
 
+// not using google.proto.Empty because it doesn't play nicely with dynamic imports
+message Empty {}
+
 service RendererService {
-  rpc CheckHealth (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc CheckHealth (Empty) returns (Empty) {}
 
   rpc Render(Request) returns (Response) {}
 }
