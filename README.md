@@ -1,6 +1,6 @@
 # Renderer
 
-[![Build Status](https://travis-ci.org/moonlightwork/renderer.svg?branch=master)](https://travis-ci.org/moonlightwork/renderer) [![Moonlight contractors](https://img.shields.io/badge/contractors-2000-brightgreen.svg)](https://moonlightwork.com/) [![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/moonlightwork/renderer/) 
+[![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/moonlightwork/renderer/) [![Moonlight contractors](https://img.shields.io/badge/contractors-2000-brightgreen.svg)](https://moonlightwork.com/) [![Godoc Reference](https://godoc.org/github.com/moonlightwork/renderer?status.svg)](https://godoc.org/github.com/moonlightwork/renderer)
 
 Renderer is a gRPC service that renders webpage HTML using the [Chromeless](https://github.com/graphcool/chromeless) package. It was inspired by the [chromeless-prerender](https://github.com/matteo-hertel/chromeless-prerender) project.
 
@@ -16,5 +16,53 @@ Changes are welcome. If you modify the proto file, please regenerate and commit 
 
 ## Booting server in Docker
 
+```sh
+docker-compose up # add `--build` to force a rebuild, `-d` to run in background
+```
+
 ### Go Client
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"golang.org/x/net/context"
+
+	"github.com/moonlightwork/renderer"
+	"google.golang.org/grpc"
+)
+
+func main() {
+	// Create connection (insecure)
+	opts := []grpc.DialOption{grpc.WithInsecure()}
+	conn, err := grpc.Dial("localhost:3000", opts...)
+	if err != nil {
+		panic(err)
+	}
+	defer conn.Close()
+
+	// Create client
+	client := renderer.NewRendererServiceClient(conn)
+
+	// Try health check endpoint to make sure container is online
+	_, err = client.CheckHealth(context.Background(), &renderer.Empty{})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("✅ API Online")
+
+	// Try rendering a URL
+	res, err := client.Render(context.Background(), &renderer.Request{Url: "https://www.moonlightwork.com"})
+	if err != nil {
+		panic(err)
+	}
+
+	// Printing HTML to show that it's been rendered
+	fmt.Printf("\n\n%v\n\n", res.Html)
+
+	fmt.Println("💡 Successfully fetched HTML")
+}
+```
 

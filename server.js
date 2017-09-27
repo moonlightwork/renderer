@@ -1,34 +1,38 @@
 const PROTO_PATH = __dirname + '/renderer.proto';
-console.log(PROTO_PATH);
 
 const grpc = require('grpc');
 const { Chromeless } = require('chromeless');
 const renderer_proto = grpc.load(PROTO_PATH).renderer;
 
+
+async function run(url) {
+  const chromeless = new Chromeless();
+  let html = await chromeless
+    .goto(url)
+    .wait(2*1000)
+    .html();
+  
+  console.log(html);  
+
+  await chromeless.end();
+  return html;
+}
+
 /**
  * Implements the CheckHealth RPC method.
  */
-function checkHealth(empty) {
+function checkHealth(empty, callback) {
   // TODO - can we validate that chromeless is working?
-  return {};
+  callback(null, {})
 }
 
 /**
  * Implements the Render RPC method.
  */
 function render(req, callback) {
-  const chromeless = new Chromeless();
-
-  try {
-    let html = chromeless
-      .goto(url)
-      .wait(2*1000)
-      .html();
-  } catch (err) {
-    callback(e)
-  }
-
-  callback(null, { html });
+  run(req.request.url)
+    .then(html => callback(null, { html }))
+    .catch(err => callback(err));
 }
 
 /**
