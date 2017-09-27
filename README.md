@@ -54,7 +54,7 @@ func main() {
 	fmt.Println("✅ API Online")
 
 	// Try rendering a URL
-	res, err := client.Render(context.Background(), &renderer.Request{Url: "https://www.moonlightwork.com"})
+	res, err := client.Render(context.Background(), &renderer.Request{Url: "https://www.moonlightwork.com/about"})
 	if err != nil {
 		panic(err)
 	}

@@ -1,5 +1,5 @@
 FROM debian:stable-slim
-
+USER root
 # Install basic tools/utilities and google Chrome unstable (which has cross platform support for headless mode). Combining theem together so that apt cache cleanup would need to be done just once.
 RUN apt-get update -y && \
     apt-get install ca-certificates \
@@ -26,7 +26,12 @@ RUN apt-get update -y && \
       curl \
       xz-utils -y --no-install-recommends \
       lsb-release \
-      supervisor
+      supervisor \
+      libnss3-tools \
+      libfontconfig1 \
+      apt-transport-https \
+      inotify-tools
+
 
 RUN sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

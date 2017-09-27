@@ -8,12 +8,9 @@ const renderer_proto = grpc.load(PROTO_PATH).renderer;
 async function run(url) {
   const chromeless = new Chromeless();
   let html = await chromeless
-    .goto(url)
-    .wait(2*1000)
-    .html();
-  
-  console.log(html);  
-
+      .goto(url)
+      .wait(1000)
+      .html();
   await chromeless.end();
   return html;
 }
@@ -46,4 +43,4 @@ function main() {
   server.start();
 }
 
-main();
+main()
