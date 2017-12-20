@@ -8,6 +8,7 @@ const renderer_proto = grpc.load(PROTO_PATH).renderer;
 async function run(url) {
   const chromeless = new Chromeless();
   let html = await chromeless
+      .setUserAgent('crawler')
       .goto(url)
       .wait(1000)
       .html();
