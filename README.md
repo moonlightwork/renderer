@@ -1,6 +1,7 @@
 # Renderer
 
-[![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/moonlightwork/renderer/) [![Moonlight contractors](https://img.shields.io/badge/contractors-2000-brightgreen.svg)](https://moonlightwork.com/) [![Godoc Reference](https://godoc.org/github.com/moonlightwork/renderer?status.svg)](https://godoc.org/github.com/moonlightwork/renderer)
+[![Docker Automated build](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/moonlightwork/renderer/) [![Moonlight contractors](https://www.moonlightwork.com/shields/moonlight.svg)](https://www.moonlightwork.com/?referredByUserID=1&referralProgram=maintainer&referrerName=the%20Moonlight%20team)
+ [![Godoc Reference](https://godoc.org/github.com/moonlightwork/renderer?status.svg)](https://godoc.org/github.com/moonlightwork/renderer)
 
 Renderer is a gRPC service that renders webpage HTML using the [Chromeless](https://github.com/graphcool/chromeless) package. It was inspired by the [chromeless-prerender](https://github.com/matteo-hertel/chromeless-prerender) project.
 
