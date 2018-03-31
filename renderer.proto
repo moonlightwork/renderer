@@ -9,9 +9,7 @@ message Request {
 }
 
 message Response {
-    // We use renderer just for generating HTML - 
-    // if you want headers or other info returned, a PR is welcome!
-    string html = 1;
+    string data = 1;
 }
 
 // not using google.proto.Empty because it doesn't play nicely with dynamic imports
@@ -21,5 +19,7 @@ service RendererService {
   rpc CheckHealth (Empty) returns (Empty) {}
 
   rpc Render(Request) returns (Response) {}
+  rpc Screenshot(Request) returns (Response) {}
+  rpc Print(Request) returns (Response) {}
 }
 
