@@ -71,8 +71,8 @@ function print(req, callback) {
 /**
  * Implements the Screenshot RPC method.
  */
-function print(req, callback) {
-  runPrint(req.request.url)
+function screenshot(req, callback) {
+  runScreenshot(req.request.url)
     .then(data => callback(null, { data }))
     .catch(err => callback(err));
 }
@@ -85,7 +85,9 @@ function main() {
   var server = new grpc.Server();
   server.addService(renderer_proto.RendererService.service, {
     checkHealth,
-    render
+    render,
+    screenshot,
+    print
   });
   server.bind("0.0.0.0:3000", grpc.ServerCredentials.createInsecure());
   server.start();
