@@ -27,7 +27,7 @@ async function runPrint(url) {
     .pdf();
   await chromeless.end();
 
-  return fs.readFileSync(src, "utf8");
+  return fs.readFileSync(src);
 }
 
 async function runScreenshot(url) {
@@ -39,7 +39,7 @@ async function runScreenshot(url) {
     .screenshot();
   await chromeless.end();
 
-  return fs.readFileSync(src, "utf8");
+  return fs.readFileSync(src);
 }
 
 /**
