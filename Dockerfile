@@ -2,35 +2,36 @@ FROM debian:stable-slim
 USER root
 # Install basic tools/utilities and google Chrome unstable (which has cross platform support for headless mode). Combining theem together so that apt cache cleanup would need to be done just once.
 RUN apt-get update -y && \
-    apt-get install ca-certificates \
-      autoconf \ 
-      build-essential \
-      gconf-service \
-      libasound2 \
-      libatk1.0-0 \
-      libatk1.0-0 \
-      libdbus-1-3 \
-      libgconf-2-4 \
-      libgtk-3-0 \
-      libnspr4 \
-      libnss3 \
-      libtool \
-      libx11-xcb1 \
-      libxss1 \
-      libxtst6 \
-      pulseaudio \
-      fonts-liberation \
-      libappindicator1 \
-      xdg-utils \
-      wget \
-      curl \
-      xz-utils -y --no-install-recommends \
-      lsb-release \
-      supervisor \
-      libnss3-tools \
-      libfontconfig1 \
-      apt-transport-https \
-      inotify-tools
+  apt-get install ca-certificates \
+  autoconf \ 
+  build-essential \
+  gconf-service \
+  libasound2 \
+  libatk1.0-0 \
+  libatk1.0-0 \
+  libdbus-1-3 \
+  libgconf-2-4 \
+  libgtk-3-0 \
+  libnspr4 \
+  libnss3 \
+  libtool \
+  libx11-xcb1 \
+  libxss1 \
+  libxtst6 \
+  pulseaudio \
+  fonts-liberation \
+  libappindicator1 \
+  xdg-utils \
+  wget \
+  curl \
+  xz-utils -y --no-install-recommends \
+  lsb-release \
+  supervisor \
+  libnss3-tools \
+  libfontconfig1 \
+  apt-transport-https \
+  inotify-tools \
+  libappindicator3-1
 
 
 RUN sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf
