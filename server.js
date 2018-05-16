@@ -23,7 +23,7 @@ async function runPrint(url) {
   let src = await chromeless
     .setUserAgent(agent)
     .goto(url)
-    .wait(3000)
+    .wait(".invoice-navigation")
     .pdf();
   await chromeless.end();
   var bmp = fs.readFileSync(src);
