@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM ubuntu
 USER root
 # Install basic tools/utilities and google Chrome unstable (which has cross platform support for headless mode). Combining theem together so that apt cache cleanup would need to be done just once.
 RUN apt-get update -y && \

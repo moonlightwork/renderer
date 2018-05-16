@@ -26,8 +26,8 @@ async function runPrint(url) {
     .wait(1500)
     .pdf();
   await chromeless.end();
-
-  return fs.readFileSync(src, "utf8");
+  var bmp = fs.readFileSync(src);
+  return new Buffer(bmp).toString("base64");
 }
 
 async function runScreenshot(url) {
@@ -39,7 +39,8 @@ async function runScreenshot(url) {
     .screenshot();
   await chromeless.end();
 
-  return fs.readFileSync(src, "utf8");
+  var bmp = fs.readFileSync(src);
+  return new Buffer(bmp).toString("base64");
 }
 
 /**
